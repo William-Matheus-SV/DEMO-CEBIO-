@@ -1,0 +1,1694 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CEBIO | Centro de Bioterismo</title>
+    <link rel="icon" type="image/png" href="logo-cebio.png" />
+
+    <!-- ===== BOOTSTRAP ===== -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css"
+    />
+
+    <!-- ===== SEU CSS ===== -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Tela de Login -->
+    <div id="loginScreen" class="login-container">
+      <div class="login-card">
+        <div class="login-header">
+          <img src="logo-cebio.png" alt="CEBIO" class="login-logo" />
+          <h2>Bem-vindo ao CEBIO</h2>
+          <p class="login-subtitle">Centro de Bioterismo</p>
+        </div>
+
+        <form id="loginForm" class="login-form">
+          <div class="form-group">
+            <label for="loginUser">Usuário</label>
+            <select id="loginUser" class="form-control">
+              <option value="">Selecione o usuário</option>
+              <option value="sandra">Sandra Klein - Gestora</option>
+              <option value="vinicius">
+                Dr. Vinícius Vasconcelos - Veterinário
+              </option>
+              <option value="natally">Natally Andréa - Técnica</option>
+              <option value="rayara">Rayara Luana - Técnica</option>
+              <option value="gutemberg">Gutemberg Aleixo - Técnico</option>
+              <option value="jigdalias">Jigdálias Eulália - Técnica</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="loginPassword">Senha</label>
+            <input
+              type="password"
+              id="loginPassword"
+              class="form-control"
+              placeholder="Digite a sua senha"
+            />
+            <small class="text-muted">Senha padrão: 123456</small>
+          </div>
+          <button type="submit" class="btn btn-primary btn-login">
+             Entrar
+          </button>
+          <div id="loginError" class="alert alert-danger" style="display: none">
+            <i class="bi bi-exclamation-triangle"></i>
+            <span>Usuário ou senha inválidos!</span>
+          </div>
+        </form>
+        <div class="login-footer">
+          <small>Versão DEMO . Sistema de Biotério</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid p-0">
+      <div class="row g-0">
+        <!-- ===== SIDEBAR ===== -->
+        <aside class="col-12 col-md-3 col-lg-2 side">
+          <div class="brand">
+            <img src="logo-cebio.png" alt="CEBIO Centro de Bioterismo" />
+          </div>
+
+          <nav class="nav-custom" id="nav">
+            <div class="nav-divider">Menu Principal</div>
+            <button class="nav-btn active" data-view="dashboard" data-menu="dashboard">
+              <i class="bi bi-speedometer2"></i> Visão geral
+            </button>
+            <button class="nav-btn" data-view="animals" data-menu="animals">
+              <i class="bi bi-box"></i> Animais e gaiolas
+            </button>
+            <button class="nav-btn" data-view="racks" data-menu="racks">
+              <i class="bi bi-grid-3x3-gap"></i> Espelho de racks
+            </button>
+            <button class="nav-btn" data-view="foundation" data-menu="foundation">
+              <i class="bi bi-heart"></i> Casais de fundação
+            </button>
+            <button class="nav-btn" data-view="breeding" data-menu="breeding">
+              <i class="bi bi-diagram-3"></i> Reprodução
+            </button>
+            <button class="nav-btn" data-view="vet" data-menu="vet">
+              <i class="bi bi-clipboard2-pulse"></i> Prontuário veterinário
+            </button>
+
+            <div class="nav-divider">Gestão</div>
+            <button class="nav-btn" data-view="reports" data-menu="reports">
+              <i class="bi bi-bar-chart"></i> Relatório mensal
+            </button>
+            <button class="nav-btn" data-view="checklist" data-menu="checklist">
+              <i class="bi bi-check2-square"></i> Checklist
+            </button>
+            <button class="nav-btn" data-view="projects" data-menu="projects">
+              <i class="bi bi-folder"></i> Projetos e CEUA
+            </button>
+            <button class="nav-btn" data-view="audit" data-menu="audit">
+              <i class="bi bi-clock-history"></i> Auditoria
+            </button>
+          </nav>
+
+          <div class="sidefoot">
+            <div class="sidefoot-title">Equipe</div>
+            <div class="sidefoot-item">
+              <i class="bi bi-person-circle me-2"></i>Sandra Klein · Gestora
+            </div>
+            <div class="sidefoot-item">
+              <i class="bi bi-person-circle me-2"></i>Dr. Vinícius Vasconcelos
+            </div>
+            <div class="sidefoot-item">
+              <i class="bi bi-person-circle me-2"></i>Natally Andréa · Técnica
+            </div>
+            <div class="sidefoot-item">
+              <i class="bi bi-person-circle me-2"></i>Rayara Luana · Técnica
+            </div>
+            <div class="sidefoot-item">
+              <i class="bi bi-person-circle me-2"></i>Gutemberg Aleixo · Técnico
+            </div>
+            <div class="sidefoot-item">
+              <i class="bi bi-person-circle me-2"></i>Jigdálias Eulália ·
+              Técnica
+            </div>
+          </div>
+        </aside>
+
+        <!-- ===== MAIN ===== -->
+        <main class="col-12 col-md-9 col-lg-10 main">
+          <div class="main-content-wrapper">
+            <!-- ===== HEADER ===== -->
+            <header class="page-header">
+              <div>
+                <h1 id="pageTitle">Visão geral</h1>
+                <p class="sub" id="pageSub">
+                  Acompanhamento da colônia e ações pendentes
+                </p>
+              </div>
+              <div class="header-actions-stack">
+                <div class="notif-bell" id="notifBell">
+                  <i class="bi bi-bell-fill"></i>
+                  <span class="notif-badge" id="notifBadge">2</span>
+                  <div class="notif-panel" id="notifPanel">
+                    <div class="notif-panel-header">Alertas e Pendências</div>
+                    <div id="notifPanelBody"></div>
+                  </div>
+                </div>
+
+                <div class="header-actions">
+                  <div class="user-avatar">SK</div>
+                  <span class="user-name">Sandra Klein · Gestora</span>
+                  <button id="logoutBtn" class="btn btn-outline-secondary btn-sm">Sair
+                </button>
+              </div>
+              </div>
+            </header>
+
+            <!-- ============================================================ -->
+            <!-- ===== 1. DASHBOARD ===== -->
+            <!-- ============================================================ -->
+            <section class="view active" id="dashboard">
+              <!-- Métricas -->
+              <div class="row g-3 mb-4">
+                <div class="col-6 col-md-3">
+                  <div
+                    class="metric-card"
+                    data-go="animals"
+                    data-metric="animals"
+                    style="cursor: pointer">
+                    <div class="metric-icon">
+                      <i class="bi bi-heart-pulse"></i>
+                    </div>
+                    <div class="metric-content">
+                      <div class="label">Animais ativos</div>
+                      <span class="value">1.284</span>
+                      <span class="note"
+                        ><i class="bi bi-arrow-up-short"></i> +36 este mês</span
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div
+                    class="metric-card"
+                    data-go="racks"
+                    data-room="mouse"
+                    data-metric="mouse"
+                    style="cursor: pointer">
+                    <div
+                      class="metric-icon"
+                      style="font-size: 1.8rem; line-height: 1">
+                      🐀
+                    </div>
+                    <div class="metric-content">
+                      <div class="label">Ocupação · Camundongo</div>
+                      <span class="value">62%</span>
+                      <div class="progress-custom">
+                        <div
+                          class="progress-bar-custom"
+                          style="width: 62%"
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div
+                    class="metric-card"
+                    data-go="racks"
+                    data-room="rat"
+                    data-metric="rat"
+                    style="cursor: pointer">
+                    <div
+                      class="metric-icon"
+                      style="font-size: 1.8rem; line-height: 1">
+                      🐭
+                    </div>
+                    <div class="metric-content">
+                      <div class="label">Ocupação · Rato</div>
+                      <span class="value">47%</span>
+                      <div class="progress-custom">
+                        <div
+                          class="progress-bar-custom"
+                          style="width: 47%"> 
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6 col-md-3">
+                  <div
+                    class="metric-card"
+                    data-go="checklist"
+                    style="cursor: pointer">
+                    <div class="metric-icon">
+                      <i class="bi bi-exclamation-triangle"></i>
+                    </div>
+                    <div class="metric-content">
+                      <div class="label">Pendências</div>
+                      <span class="value">12</span>
+                      <span class="note text-danger">
+                      <i class="bi bi-clock"></i> 6 hoje</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Conteúdo principal do dashboard -->
+              <div class="row g-3">
+                <div class="col-lg-7" data-role-visible="admin">
+                  <div class="card-custom">
+                    <div class="card-header-custom">
+                      <h5 class="fw-semibold">Atividade recente</h5>
+                      <small class="text-muted"
+                        >Últimos eventos registrados no sistema</small
+                      >
+                    </div>
+                    <div class="table-responsive mt-2">
+                      <table class="table table-custom">
+                        <thead>
+                          <tr>
+                            <th>Quando</th>
+                            <th>Evento</th>
+                            <th>Responsável</th>
+                            <th>Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Hoje, 09:42</td>
+                            <td>Desmame · Gaiola 2038</td>
+                            <td>Natally Andréa</td>
+                            <td>
+                              <span class="tag tag-success">Concluído</span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Hoje, 08:17</td>
+                            <td>Movimentação · Rack 02 → 05</td>
+                            <td>Rayara Luana</td>
+                            <td>
+                              <span class="tag tag-blue">Em andamento</span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>17 Jul, 16:31</td>
+                            <td>Prontuário · R-5012</td>
+                            <td>Dr. Vinícius</td>
+                            <td><span class="tag tag-warn">Pendente</span></td>
+                          </tr>
+                          <tr>
+                            <td>17 Jul, 14:20</td>
+                            <td>Nascimento · C57BL/6</td>
+                            <td>Jigdálias Eulália</td>
+                            <td>
+                              <span class="tag tag-success">Concluído</span>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="row g-3 mt-1">
+                <div class="col-lg-6">
+                  <div class="card-custom" id="myActivitiesCard" style="display:none">
+                    <h5 class="fw-semibold mb-2"><i class="bi bi-list-task me-2"></i>Minhas atividades</h5>
+                    <div id="myActivitiesList"></div>
+                  </div>
+                </div>
+
+                <div class="col-lg-6">
+                  <div class="card-custom" id="myHistoryCard" style="display:none">
+                    <div class="card-header-custom">
+                      <h5 class="fw-semibold mb-0">Últimas ações registradas por você</h5>
+                    </div>
+                    <div class="table-responsive">
+                      <table class="table table-custom">
+                        <thead>
+                          <tr>
+                            <th>Quando</th>
+                            <th>Evento</th>
+                            <th>Status</th>
+                          </tr>
+                        </thead>
+                        <tbody id="myHistoryBody"></tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </section>
+            <!-- ============================================================ -->
+            <!-- ===== 2. ANIMAIS ===== -->
+            <!-- ============================================================ -->
+            <section class="view" id="animals">
+              <div class="card-custom">
+                <div class="card-header-custom">
+                  <div>
+                    <h5 class="mb-0 fw-semibold">
+                      Cadastro de animais e gaiolas
+                    </h5>
+                    <small class="text-muted"
+                      >Identificação individual, vínculo de projeto e situação
+                      atual</small
+                    >
+                  </div>
+                  <button class="btn btn-primary btn-sm" id="newAnimalBtn">
+                    <i class="bi bi-plus-lg"></i> Registrar animal
+                  </button>
+                </div>
+
+                <!-- Filtros -->
+                <div class="filters-bar">
+                  <div class="row g-2">
+                    <div class="col-md-2">
+                      <label class="form-label small text-muted">Espécie</label>
+                      <select
+                        class="form-select form-select-sm"
+                        id="animalSpecies"
+                      >
+                        <option value="Todas">Todas</option>
+                        <option>Camundongo</option>
+                        <option>Rato</option>
+                      </select>
+                    </div>
+                    <div class="col-md-2">
+                      <label class="form-label small text-muted"
+                        >Linhagem</label
+                      >
+                      <select
+                        class="form-select form-select-sm"
+                        id="animalLineage"
+                      >
+                        <option value="Todas">Todas</option>
+                        <optgroup label="Camundongo">
+                          <option>BALB/c</option>
+                          <option>C57BL/6</option>
+                        </optgroup>
+                        <optgroup label="Rato">
+                          <option>Wistar</option>
+                          <option>SHR</option>
+                        </optgroup>
+                      </select>
+                    </div>
+                    <div class="col-md-2">
+                      <label class="form-label small text-muted">Status</label>
+                      <select
+                        class="form-select form-select-sm"
+                        id="animalStatus"
+                      >
+                        <option value="Todos">Todos</option>
+                        <option>Ativo</option>
+                        <option>Observação</option>
+                        <option>Reservado</option>
+                        <option>Doação</option>
+                        <option>Disponível</option>
+                        <option>Morto</option>
+                        <option>Doado</option>
+                      </select>
+                    </div>
+                    <div class="col-md-3">
+                      <label class="form-label small text-muted">Buscar</label>
+                      <input
+                        class="form-control form-control-sm"
+                        id="animalSearch"
+                        placeholder="Código ou gaiola..."
+                      />
+                    </div>
+                    <div class="col-md-2 d-flex align-items-end gap-1">
+                      <button
+                        class="btn btn-sm btn-secondary"
+                        id="animalFilterBtn"
+                      >
+                        <i class="bi bi-search"></i> Filtrar
+                      </button>
+                      <button
+                        class="btn btn-sm btn-outline-secondary"
+                        id="animalClearBtn"
+                      >
+                        <i class="bi bi-x"></i> Limpar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Tabela -->
+                <div class="table-responsive">
+                  <table class="table table-custom">
+                    <thead>
+                      <tr>
+                        <th>Código</th>
+                        <th>Espécie / Linhagem</th>
+                        <th>Sexo / Idade</th>
+                        <th>Gaiola</th>
+                        <th>Projeto</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody id="animalsTableBody">
+                      <!-- ⬇️ A TABELA FICA VAZIA AQUI ⬇️ -->
+                      <!-- O JavaScript vai preencher com os dados do localStorage -->
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="pagination-bar">
+                  <span class="small text-muted" id="animalCount"
+                    >Carregando...</span
+                  >
+                  <div>
+                    <button class="btn btn-sm btn-outline-secondary">
+                      <i class="bi bi-chevron-left"></i>
+                    </button>
+                    <button class="btn btn-sm btn-primary">1</button>
+                    <button class="btn btn-sm btn-outline-secondary">2</button>
+                    <button class="btn btn-sm btn-outline-secondary">3</button>
+                    <button class="btn btn-sm btn-outline-secondary">
+                      <i class="bi bi-chevron-right"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- ============================================================ -->
+            <!-- ===== 3. RACKS ===== -->
+            <!-- ============================================================ -->
+            <section class="view" id="racks">
+              <div class="card-custom">
+                <div class="card-header-custom">
+                  <div>
+                    <h5 class="mb-0 fw-semibold">Espelho da rack</h5>
+                    <p class="sub mb-0" id="rackInfo">
+                      Sala de Camundongo · Rack 01 · 36 espaços
+                    </p>
+                  </div>
+                  <div class="d-flex gap-2">
+                    <div>
+                      <label class="form-label small text-muted">Sala</label>
+                      <select
+                        class="form-select form-select-sm"
+                        id="roomSelect"
+                      >
+                        <option value="mouse">Sala de Camundongo</option>
+                        <option value="rat">Sala de Rato</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label class="form-label small text-muted">Rack</label>
+                      <select
+                        class="form-select form-select-sm"
+                        id="rackSelect"
+                      ></select>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Grid das gaiolas -->
+                <div class="rack-grid grid-36" id="rackGrid"></div>
+
+                <!-- Legenda -->
+                <div class="legend mt-3">
+                  <span><span class="dot dot-c"></span>Casal de Fundação</span>
+                  <span><span class="dot dot-e"></span>Casal de Expansão</span>
+                  <span><span class="dot dot-r"></span>Reservado</span>
+                  <span><span class="dot dot-d"></span>Doação</span>
+                  <span><span class="dot dot-empty"></span>Disponível</span>
+                </div>
+              </div>
+
+              <!-- Detalhes da gaiola -->
+              <div class="card-custom mt-3" id="cageDetail">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <h5 class="mb-0 fw-semibold">Detalhes da gaiola</h5>
+                    <small class="text-muted"
+                      >Clique em uma gaiola para ver as informações
+                      completas</small
+                    >
+                  </div>
+                  <span class="tag">Histórico auditável</span>
+                </div>
+                <div class="text-center py-4 text-muted">
+                  <i class="bi bi-cursor fs-4 d-block"></i>
+                  <span>Selecione uma gaiola no espelho acima</span>
+                </div>
+              </div>
+            </section>
+
+            <!-- ============================================================ -->
+            <!-- ===== 4. FOUNDATION ===== -->
+            <!-- ============================================================ -->
+            <section class="view" id="foundation">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="card-custom">
+                    <div class="card-header-custom">
+                      <h5 class="fw-semibold">Programar casais de fundação</h5>
+                      <small class="text-muted"
+                        >A sequência é sugerida automaticamente pela
+                        linhagem</small
+                      >
+                    </div>
+                    <div class="row g-2">
+                      <div class="col-md-6">
+                        <label class="form-label small text-muted"
+                          >Espécie</label
+                        >
+                        <select class="form-select form-select-sm">
+                          <option>Camundongo</option>
+                          <option>Rato</option>
+                        </select>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label small text-muted"
+                          >Linhagem</label
+                        >
+                        <select
+                          class="form-select form-select-sm"
+                          id="foundationLineage"
+                        >
+                          <optgroup label="Camundongo">
+                            <option value="1000">BALB/c</option>
+                            <option value="2000">C57BL/6</option>
+                            <option value="3000">Swiss Webster</option>
+                          </optgroup>
+                          <optgroup label="Rato">
+                            <option value="4000">Wistar</option>
+                            <option value="5000">SHR</option>
+                          </optgroup>
+                        </select>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label small text-muted"
+                          >Data prevista</label
+                        >
+                        <input
+                          class="form-control form-control-sm"
+                          type="date"
+                          value="2026-07-22"
+                        />
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label small text-muted"
+                          >Nº da gaiola</label
+                        >
+                        <input
+                          class="form-control form-control-sm"
+                          id="foundationCage"
+                          value="1001"
+                        />
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label small text-muted"
+                          >Geração</label
+                        >
+                        <input
+                          class="form-control form-control-sm"
+                          value="G1"
+                        />
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label small text-muted">Grupo</label>
+                        <input
+                          class="form-control form-control-sm"
+                          value="Fundação 2026-B"
+                        />
+                      </div>
+                    </div>
+                    <div class="mt-3 d-flex gap-2">
+                      <button
+                        class="btn btn-primary btn-sm"
+                        id="saveFoundation"
+                      >
+                        <i class="bi bi-plus-lg"></i> Programar
+                      </button>
+                      <button
+                        class="btn btn-outline-secondary btn-sm"
+                        id="nextCage"
+                      >
+                        <i class="bi bi-arrow-right"></i> Próximo número
+                      </button>
+                    </div>
+                    <div class="mt-2 audit-log" id="foundationAudit">
+                      Nenhum casal programado nesta sessão
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="card-custom">
+                    <div class="card-header-custom">
+                      <h5 class="fw-semibold">Sequência padrão por linhagem</h5>
+                    </div>
+                    <div class="lineage-sequence">
+                      <div class="sequence-item">
+                        <span
+                          class="sequence-color"
+                          style="background: #6f2934"
+                        ></span>
+                        <span><strong>BALB/c</strong> 1000</span>
+                      </div>
+                      <div class="sequence-item">
+                        <span
+                          class="sequence-color"
+                          style="background: #a93f50"
+                        ></span>
+                        <span><strong>C57BL/6</strong> 2000</span>
+                      </div>
+                      <div class="sequence-item">
+                        <span
+                          class="sequence-color"
+                          style="background: #7a828f"
+                        ></span>
+                        <span><strong>Swiss Webster</strong> 3000</span>
+                      </div>
+                      <div class="sequence-item">
+                        <span
+                          class="sequence-color"
+                          style="background: #4a6fa5"
+                        ></span>
+                        <span><strong>Wistar</strong> 4000</span>
+                      </div>
+                      <div class="sequence-item">
+                        <span
+                          class="sequence-color"
+                          style="background: #d4a04a"
+                        ></span>
+                        <span><strong>SHR</strong> 5000</span>
+                      </div>
+                    </div>
+                    <div class="alert alert-info-custom alert-custom mt-3">
+                      <i class="bi bi-info-circle-fill"></i>
+                      <span
+                        >Os números são gerados automaticamente para evitar
+                        duplicidade</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- ============================================================ -->
+            <!-- ===== 5. BREEDING (NOVA TELA) ===== -->
+            <!-- ============================================================ -->
+            <section class="view" id="breeding">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="card-custom">
+                    <div class="card-header-custom">
+                      <h5 class="fw-semibold">Registro de acasalamento</h5>
+                      <small class="text-muted"
+                        >Vincule macho e fêmea para reprodução</small
+                      >
+                    </div>
+                    <div class="row g-2">
+                      <div class="col-md-6">
+                        <label class="form-label small text-muted">Macho</label>
+                        <select class="form-select form-select-sm">
+                          <option>M-2031-01 · C57BL/6</option>
+                          <option>M-2036-01 · C57BL/6</option>
+                          <option>M-2041-01 · C57BL/6</option>
+                        </select>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label small text-muted">Fêmea</label>
+                        <select class="form-select form-select-sm">
+                          <option>F-2031-02 · C57BL/6</option>
+                          <option>F-2036-02 · C57BL/6</option>
+                          <option>F-2041-02 · C57BL/6</option>
+                        </select>
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label small text-muted"
+                          >Data do acasalamento</label
+                        >
+                        <input
+                          class="form-control form-control-sm"
+                          type="date"
+                          value="2026-07-15"
+                        />
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label small text-muted"
+                          >Gaiola</label
+                        >
+                        <select class="form-select form-select-sm">
+                          <option>G 2031</option>
+                          <option>G 2036</option>
+                          <option>G 2041</option>
+                        </select>
+                      </div>
+                      <div class="col-12">
+                        <label class="form-label small text-muted"
+                          >Observações</label
+                        >
+                        <textarea
+                          class="form-control form-control-sm"
+                          rows="2"
+                          placeholder="Registrar condições do acasalamento..."
+                        ></textarea>
+                      </div>
+                    </div>
+                    <div class="mt-3">
+                      <button class="btn btn-primary btn-sm">
+                        <i class="bi bi-plus-lg"></i> Registrar acasalamento
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="card-custom">
+                    <div class="card-header-custom">
+                      <h5 class="fw-semibold">Acasalamentos ativos</h5>
+                      <small class="text-muted"
+                        >Casais em reprodução no momento</small
+                      >
+                    </div>
+                    <div class="table-responsive">
+                      <table class="table table-custom">
+                        <thead>
+                          <tr>
+                            <th>Gaiola</th>
+                            <th>Casal</th>
+                            <th>Data</th>
+                            <th>Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td><b>G 2031</b></td>
+                            <td>M-2031-01 / F-2031-02</td>
+                            <td>10/06/2026</td>
+                            <td><span class="tag tag-success">Ativo</span></td>
+                          </tr>
+                          <tr>
+                            <td><b>G 2036</b></td>
+                            <td>M-2036-01 / F-2036-02</td>
+                            <td>24/06/2026</td>
+                            <td><span class="tag tag-success">Ativo</span></td>
+                          </tr>
+                          <tr>
+                            <td><b>G 2041</b></td>
+                            <td>M-2041-01 / F-2041-02</td>
+                            <td>03/07/2026</td>
+                            <td>
+                              <span class="tag tag-warn">Observação</span>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="mt-2">
+                      <h6 class="fw-semibold">Nascimentos recentes</h6>
+                      <div class="births-list">
+                        <div class="birth-item">
+                          <span class="birth-date">08/07/2026</span>
+                          <span class="birth-info"
+                            >G 2031 · 9 filhotes (4M/5F)</span
+                          >
+                        </div>
+                        <div class="birth-item">
+                          <span class="birth-date">14/07/2026</span>
+                          <span class="birth-info"
+                            >G 2036 · 7 filhotes (3M/4F)</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Planejamento de desmame -->
+              <div class="card-custom mt-3">
+                <div class="card-header-custom">
+                  <h5 class="fw-semibold">Planejamento de desmame</h5>
+                  <small class="text-muted"
+                    >Registre a separação dos filhotes</small
+                  >
+                </div>
+                <div class="row g-2">
+                  <div class="col-md-3">
+                    <label class="form-label small text-muted"
+                      >Gaiola de origem</label
+                    >
+                    <select class="form-select form-select-sm">
+                      <option>2038 + 2040</option>
+                      <option>2038</option>
+                      <option>2040</option>
+                    </select>
+                  </div>
+                  <div class="col-md-3">
+                    <label class="form-label small text-muted">Destino</label>
+                    <select class="form-select form-select-sm">
+                      <option>Projeto</option>
+                      <option>Fundação</option>
+                      <option>Expansão</option>
+                      <option>Venda</option>
+                      <option>Doação</option>
+                      <option>Disponível</option>
+                    </select>
+                  </div>
+                  <div class="col-md-2">
+                    <label class="form-label small text-muted"
+                      >Quantidade Macho</label
+                    >
+                    <input
+                      class="form-control form-control-sm"
+                      type="number"
+                      value="8"
+                    />
+                  </div>
+                  <div class="col-md-2">
+                    <label class="form-label small text-muted"
+                      >Quantidade Fêmea</label
+                    >
+                    <input
+                      class="form-control form-control-sm"
+                      type="number"
+                      value="8"
+                    />
+                  </div>
+                  <div class="col-md-2">
+                    <label class="form-label small text-muted">CEUA</label>
+                    <select class="form-select form-select-sm">
+                      <option>018/2026</option>
+                      <option>022/2026</option>
+                      <option>Não se aplica</option>
+                    </select>
+                  </div>
+                  <div class="col-md-2 d-flex align-items-end">
+                    <button class="btn btn-primary btn-sm w-100">
+                      <i class="bi bi-check2"></i> Registrar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- ============================================================ -->
+            <!-- ===== 6. VET ===== -->
+            <!-- ============================================================ -->
+            <section class="view" id="vet">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="card-custom">
+                    <div class="card-header-custom">
+                      <h5 class="fw-semibold">Novo registro veterinário</h5>
+                      <small class="text-muted"
+                        >Cada anotação é vinculada ao animal ou gaiola</small
+                      >
+                    </div>
+                    <div class="row g-2">
+                      <div class="col-md-4">
+                        <label class="form-label small text-muted"
+                          >Animal</label
+                        >
+                        <input
+                          class="form-control form-control-sm"
+                          value="R-5012"
+                        />
+                      </div>
+                      <div class="col-md-4">
+                        <label class="form-label small text-muted">Data</label>
+                        <input
+                          class="form-control form-control-sm"
+                          type="date"
+                          value="2026-07-18"
+                        />
+                      </div>
+                      <div class="col-md-4">
+                        <label class="form-label small text-muted"
+                          >Situação</label
+                        >
+                        <select class="form-select form-select-sm">
+                          <option>Observação</option>
+                          <option>Liberado</option>
+                          <option>Eutanásia</option>
+                        </select>
+                      </div>
+                      <div class="col-12">
+                        <label class="form-label small text-muted"
+                          >Problema relatado</label
+                        >
+                        <input
+                          class="form-control form-control-sm"
+                          placeholder="Ex.: lesão cutânea, perda de peso..."
+                        />
+                      </div>
+                      <div class="col-12">
+                        <label class="form-label small text-muted"
+                          >Observações e conduta</label
+                        >
+                        <textarea
+                          class="form-control form-control-sm"
+                          rows="2"
+                          placeholder="Evolução clínica e tratamento..."
+                        ></textarea>
+                      </div>
+                    </div>
+                    <div class="mt-3 d-flex gap-2">
+                      <button class="btn btn-primary btn-sm" id="vetSave">
+                        <i class="bi bi-check2-circle"></i> Assinar e registrar
+                      </button>
+                      <button class="btn btn-outline-secondary btn-sm">
+                        <i class="bi bi-clock"></i> Salvar rascunho
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="card-custom">
+                    <div class="card-header-custom">
+                      <h5 class="fw-semibold">Prontuário · R-5012</h5>
+                      <span class="tag tag-warn">Em observação</span>
+                    </div>
+                    <div class="alert alert-warning-custom alert-custom">
+                      <i class="bi bi-exclamation-triangle"></i>
+                      <div>
+                        <strong>Última atualização: 19 Jul 2026</strong>
+                        <div class="small">
+                          Paciente em observação, revisão agendada
+                        </div>
+                      </div>
+                    </div>
+                    <div class="table-responsive">
+                      <table class="table table-custom">
+                        <thead>
+                          <tr>
+                            <th>Data</th>
+                            <th>Problema</th>
+                            <th>Conduta</th>
+                            <th>Responsável</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>17 Jul</td>
+                            <td>Dermatite leve</td>
+                            <td>Observação</td>
+                            <td>Dra. A. Costa</td>
+                          </tr>
+                          <tr>
+                            <td>12 Jul</td>
+                            <td>Triagem</td>
+                            <td>Liberado</td>
+                            <td>Dr. Vinícius</td>
+                          </tr>
+                          <tr>
+                            <td>05 Jul</td>
+                            <td>Peso abaixo</td>
+                            <td>Dieta</td>
+                            <td>Dra. A. Costa</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="mt-2">
+                      <button class="btn btn-sm btn-outline-secondary">
+                        <i class="bi bi-printer"></i> Imprimir prontuário
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- ============================================================ -->
+            <!-- ===== 7. REPORTS ===== -->
+            <!-- ============================================================ -->
+            <section class="view" id="reports">
+              <div class="card-custom">
+                <div class="card-header-custom">
+                  <div>
+                    <h5 class="mb-0 fw-semibold">
+                      Relatório mensal · Agosto 2026
+                    </h5>
+                    <small class="text-muted"
+                      >Indicadores consolidados para CEUA e gestão</small
+                    >
+                  </div>
+                  <div class="d-flex gap-2">
+                    <button class="btn btn-outline-secondary btn-sm">
+                      <i class="bi bi-printer"></i> Imprimir
+                    </button>
+                    <button class="btn btn-secondary btn-sm">
+                      <i class="bi bi-download"></i> Exportar
+                    </button>
+                  </div>
+                </div>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <h6 class="fw-semibold">Nascimentos por linhagem</h6>
+                    <div class="mt-2">
+                      <div class="report-bar">
+                        <div class="d-flex justify-content-between small">
+                          <span>BALB/c</span><b>86</b>
+                        </div>
+                        <div class="progress-custom">
+                          <div
+                            class="progress-bar-custom"
+                            style="width: 72%"
+                          ></div>
+                        </div>
+                      </div>
+                      <div class="report-bar mt-2">
+                        <div class="d-flex justify-content-between small">
+                          <span>C57BL/6</span><b>65</b>
+                        </div>
+                        <div class="progress-custom">
+                          <div
+                            class="progress-bar-custom"
+                            style="width: 54%"
+                          ></div>
+                        </div>
+                      </div>
+                      <div class="report-bar mt-2">
+                        <div class="d-flex justify-content-between small">
+                          <span>Swiss Webster</span><b>40</b>
+                        </div>
+                        <div class="progress-custom">
+                          <div
+                            class="progress-bar-custom"
+                            style="width: 32%"
+                          ></div>
+                        </div>
+                      <div class="report-bar mt-2">
+                        <div class="d-flex justify-content-between small">
+                          <span>Wistar</span><b>59</b>
+                        </div>
+                        <div class="progress-custom">
+                          <div
+                            class="progress-bar-custom"
+                            style="width: 49%"
+                          ></div>
+                        </div>
+                      </div>
+                      <div class="report-bar mt-2">
+                        <div class="d-flex justify-content-between small">
+                          <span>SHR</span><b>35</b>
+                        </div>
+                        <div class="progress-custom">
+                          <div
+                            class="progress-bar-custom"
+                            style="width: 29%"
+                          ></div>
+                        </div>
+                      </div>
+                      <div class="report-total mt-2">
+                        <span class="fw-semibold"
+                          >Total de nascimentos: 245</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <h6 class="fw-semibold">Saídas no mês</h6>
+                    <table class="table table-custom">
+                      <thead>
+                        <tr>
+                          <th>Destino</th>
+                          <th class="text-end">Animais</th>
+                          <th class="text-end">%</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Projeto</td>
+                          <td class="text-end">96</td>
+                          <td class="text-end">54%</td>
+                        </tr>
+                        <tr>
+                          <td>Experimentação</td>
+                          <td class="text-end">42</td>
+                          <td class="text-end">24%</td>
+                        </tr>
+                        <tr>
+                          <td>Venda</td>
+                          <td class="text-end">21</td>
+                          <td class="text-end">12%</td>
+                        </tr>
+                        <tr>
+                          <td>Eutanásia</td>
+                          <td class="text-end">18</td>
+                          <td class="text-end">10%</td>
+                        </tr>
+                        <tr class="fw-semibold">
+                          <td>Total</td>
+                          <td class="text-end">177</td>
+                          <td class="text-end">100%</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </section>
+                
+
+            <!-- ============================================================ -->
+            <!-- ===== 8. CHECKLIST ===== -->
+            <!-- ============================================================ -->
+            <section class="view" id="checklist">
+            <!-- Grade de técnicos -->
+            <div class="card-custom" id="checklistTeamView">
+              <div class="card-header-custom">
+                <div>
+                  <h5 class="mb-0 fw-semibold">Checklist de atividades</h5>
+                  <small class="text-muted">Selecione um técnico para ver as atividades do dia</small>
+                </div>
+              </div>
+              <div class="row g-3" id="technicianCards"></div>
+            </div>
+
+            <!-- Detalhe de um técnico (escondido até clicar em um card) -->
+            <div class="card-custom" id="checklistDetailView" style="display:none">
+              <div class="card-header-custom">
+                <div>
+                  <button class="btn btn-sm btn-outline-secondary mb-2" id="backToTeamBtn">
+                    <i class="bi bi-arrow-left"></i> Voltar
+                  </button>
+                  <h5 class="mb-0 fw-semibold" id="detailTechName"></h5>
+                  <small class="text-muted">Atividades do dia</small>
+                </div>
+                <button class="btn btn-primary btn-sm" id="addActivityBtn">
+                  <i class="bi bi-plus-lg"></i> Nova atividade
+                </button>
+              </div>
+              <div class="row g-3 mb-4" id="technicianDetailMetrics"></div>
+              <div id="detailActivitiesList"></div>
+            </div>
+          </section>
+
+            <!-- ============================================================ -->
+            <!-- ===== 9. PROJECTS ===== -->
+            <!-- ============================================================ -->
+            <section class="view" id="projects">
+              <div class="card-custom">
+                <div class="card-header-custom">
+                  <div>
+                    <h5 class="mb-0 fw-semibold">Projetos e CEUA</h5>
+                    <small class="text-muted"
+                      >Controle do limite aprovado e animais vinculados</small
+                    >
+                  </div>
+                  <button class="btn btn-primary btn-sm" id="newProjectBtn">
+                    <i class="bi bi-plus-lg"></i> Novo projeto
+                  </button>
+                </div>
+
+                <div class="table-responsive">
+                  <table class="table table-custom">
+                    <thead>
+                      <tr>
+                        <th>Projeto</th>
+                        <th>Responsável</th>
+                        <th>CEUA</th>
+                        <th>Limite</th>
+                        <th>Vinculados</th>
+                        <th>%</th>
+                        <th>Situação</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody id="projectsTableBody">
+                      <!-- Renderizado dinamicamente por renderProjectsTable() em script.js -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+
+            <!-- ============================================================ -->
+            <!-- ===== 10. AUDIT ===== -->
+            <!-- ============================================================ -->
+            <section class="view" id="audit">
+              <div class="card-custom">
+                <div class="card-header-custom">
+                  <div>
+                    <h5 class="mb-0 fw-semibold">Histórico auditável</h5>
+                    <small class="text-muted"
+                      >Eventos imutáveis, assinados e ordenados
+                      cronologicamente</small
+                    >
+                  </div>
+                  <button class="btn btn-secondary btn-sm">
+                    <i class="bi bi-download"></i> Exportar CSV
+                  </button>
+                </div>
+
+                <div class="filters-bar">
+                  <div class="row g-2">
+                    <div class="col-md-3">
+                      <label class="form-label small text-muted">Tipo de evento</label>
+                      <select class="form-select form-select-sm" id="auditType">
+                        <option value="Todos">Todos</option>
+                        <option value="Desmame">Desmame</option>
+                        <option value="Movimentação">Movimentação</option>
+                        <option value="Procedimento">Procedimento</option>
+                        <option value="Veterinário">Veterinário</option>
+                        <option value="Nascimento">Nascimento</option>
+                      </select>
+                    </div>
+                    <div class="col-md-3">
+                      <label class="form-label small text-muted">Responsável</label>
+                      <input class="form-control form-control-sm" id="auditResponsible" placeholder="Nome do responsável">
+                    </div>
+                    <div class="col-md-2">
+                      <label class="form-label small text-muted">Data inicial</label>
+                      <input class="form-control form-control-sm" type="date" id="auditDateStart"> 
+                    </div>
+                    <div class="col-md-2">
+                      <label class="form-label small text-muted">Data final</label>
+                      <input class="form-control form-control-sm" type="date" id="auditDateEnd">
+                    </div>
+                    <div class="col-md-2 d-flex align-items-end">
+                      <button class="btn btn-sm btn-secondary w-100" id="auditFilterBtn">
+                        <i class="bi bi-funnel"></i> Filtrar
+                      </button>
+                      <button class="btn btn-sm btn-outline-secondary" id="auditClearBtn">
+                          <i class="bi bi-x"></i> Limpar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="table-responsive">
+                  <table class="table table-custom">
+                    <thead>
+                      <tr>
+                        <th>Data/Hora</th>
+                        <th>Ação</th>
+                        <th>Objeto</th>
+                        <th>Detalhes</th>
+                        <th>Assinatura</th>
+                      </tr>
+                    </thead>
+                    <tbody id="auditTableBody">
+                      <!-- Renderizado automaticamente por renderAuditTable -->
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="pagination-bar">
+                  <span class="small text-muted" id="auditCount">Carregando...</span>
+                  <div>
+                    <button class="btn btn-sm btn-outline-secondary">
+                      <i class="bi bi-chevron-left"></i>
+                    </button>
+                    <button class="btn btn-sm btn-primary">1</button>
+                    <button class="btn btn-sm btn-outline-secondary">2</button>
+                    <button class="btn btn-sm btn-outline-secondary">3</button>
+                    <button class="btn btn-sm btn-outline-secondary">
+                      <i class="bi bi-chevron-right"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ===== MODAL: PROJETO (criar / editar) ===== -->
+    <!-- ============================================================ -->
+    <div class="modal fade" id="projectModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="projectModalTitle">Novo projeto</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Fechar"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" id="projectId" />
+            <div class="mb-2">
+              <label class="form-label small text-muted">Nome do projeto</label>
+              <input
+                class="form-control form-control-sm"
+                id="projectName"
+                placeholder="Ex.: Neuroinflamação"
+              />
+            </div>
+            <div class="mb-2">
+              <label class="form-label small text-muted">Responsável</label>
+              <input
+                class="form-control form-control-sm"
+                id="projectResponsible"
+                placeholder="Ex.: Prof. R. Almeida"
+              />
+            </div>
+            <div class="row g-2">
+              <div class="col-6">
+                <label class="form-label small text-muted">CEUA</label>
+                <input
+                  class="form-control form-control-sm"
+                  id="projectCeua"
+                  placeholder="000/2026"
+                />
+              </div>
+              <div class="col-6">
+                <label class="form-label small text-muted"
+                  >Limite de animais</label
+                >
+                <input
+                  class="form-control form-control-sm"
+                  type="number"
+                  min="0"
+                  id="projectLimit"
+                />
+              </div>
+            </div>
+            <div class="row g-2 mt-1">
+              <div class="col-6">
+                <label class="form-label small text-muted"
+                  >Animais vinculados</label
+                >
+                <input
+                  class="form-control form-control-sm"
+                  type="number"
+                  min="0"
+                  id="projectLinked"
+                />
+              </div>
+              <div class="col-6">
+                <label class="form-label small text-muted">Situação</label>
+                <select class="form-select form-select-sm" id="projectStatus">
+                  <option>Ativo</option>
+                  <option>Em andamento</option>
+                  <option>Iniciando</option>
+                  <option>Encerrado</option>
+                </select>
+              </div>
+            </div>
+            <div
+              class="alert-custom alert-danger-custom mt-2"
+              id="projectFormError"
+              style="display: none"
+            >
+              <i class="bi bi-exclamation-triangle-fill"></i>
+              <span id="projectFormErrorText"></span>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">
+              Cancelar
+            </button>
+            <button class="btn btn-primary btn-sm" id="saveProjectBtn">
+              <i class="bi bi-check2"></i> Salvar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ===== MODAL: GAIOLA (criar / editar) ===== -->
+    <!-- ============================================================ -->
+    <div class="modal fade" id="cageModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="cageModalTitle">Nova gaiola</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Fechar"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" id="cageId" />
+            <div class="row g-2">
+              <div class="col-md-4">
+                <label class="form-label small text-muted"
+                  >Número da gaiola</label
+                >
+                <input
+                  class="form-control form-control-sm"
+                  id="cage_cageNumber"
+                  placeholder="Ex.: 2044"
+                />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label small text-muted">Espécie</label>
+                <select class="form-select form-select-sm" id="cage_species">
+                  <option>Camundongo</option>
+                  <option>Rato</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label class="form-label small text-muted">Linhagem</label>
+                <input
+                  class="form-control form-control-sm"
+                  id="cage_lineage"
+                  placeholder="Ex.: C57BL/6"
+                />
+              </div>
+            </div>
+            <div class="row g-2 mt-1">
+              <div class="col-md-6">
+                <label class="form-label small text-muted">Tipo</label>
+                <select class="form-select form-select-sm" id="cage_type">
+                  <option value="Casal de Fundação">Casal de Fundação</option>
+                  <option value="Casal de Expansão">Casal de Expansão</option>
+                  <option value="Desmamados">Desmamados</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small text-muted">Situação</label>
+                <input
+                  class="form-control form-control-sm"
+                  id="cage_status"
+                  placeholder="Ex.: Ativo, Doação, Reservado para projeto..."
+                />
+              </div>
+            </div>
+            <div class="row g-2 mt-1">
+              <div class="col-md-6">
+                <label class="form-label small text-muted">Grupo</label>
+                <input
+                  class="form-control form-control-sm"
+                  id="cage_group"
+                  placeholder="Ex.: Fundação 2026-C"
+                />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small text-muted">Geração</label>
+                <input
+                  class="form-control form-control-sm"
+                  id="cage_generation"
+                  placeholder="Ex.: F1"
+                />
+              </div>
+            </div>
+            <div class="row g-2 mt-1">
+              <div class="col-md-6">
+                <label class="form-label small text-muted">Macho reprodutor</label>
+                <input
+                  class="form-control form-control-sm"
+                  id="cage_father"
+                  placeholder="Ex.: M-2010-01 · C57BL/6"
+                />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small text-muted">Fêmea matriz</label>
+                <input
+                  class="form-control form-control-sm"
+                  id="cage_mother"
+                  placeholder="Ex.: F-2010-02 · C57BL/6"
+                />
+              </div>
+            </div>
+            <div class="row g-2 mt-1">
+              <div class="col-md-3">
+                <label class="form-label small text-muted">Data nasc.</label>
+                <input
+                  class="form-control form-control-sm"
+                  type="date"
+                  id="cage_birth"
+                />
+              </div>
+              <div class="col-md-3">
+                <label class="form-label small text-muted">Data desmame</label>
+                <input
+                  class="form-control form-control-sm"
+                  type="date"
+                  id="cage_weaning"
+                />
+              </div>
+              <div class="col-md-3">
+                <label class="form-label small text-muted">Data morte</label>
+                <input
+                  class="form-control form-control-sm"
+                  type="date"
+                  id="cage_death"
+                />
+              </div>
+              <div class="col-md-3">
+                <label class="form-label small text-muted">Caixa</label>
+                <input
+                  class="form-control form-control-sm"
+                  id="cage_box"
+                  placeholder="01"
+                />
+              </div>
+            </div>
+            <div class="row g-2 mt-1">
+              <div class="col-md-4">
+                <label class="form-label small text-muted">Nº</label>
+                <input
+                  class="form-control form-control-sm"
+                  id="cage_number"
+                  placeholder="01"
+                />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label small text-muted">Machos</label>
+                <input
+                  class="form-control form-control-sm"
+                  type="number"
+                  min="0"
+                  id="cage_maleCount"
+                />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label small text-muted">Fêmeas</label>
+                <input
+                  class="form-control form-control-sm"
+                  type="number"
+                  min="0"
+                  id="cage_femaleCount"
+                />
+              </div>
+            </div>
+            <div
+              class="alert-custom alert-danger-custom mt-2"
+              id="cageFormError"
+              style="display: none"
+            >
+              <i class="bi bi-exclamation-triangle-fill"></i>
+              <span id="cageFormErrorText"></span>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">
+              Cancelar
+            </button>
+            <button class="btn btn-primary btn-sm" id="saveCageBtn">
+              <i class="bi bi-check2"></i> Salvar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ===== MODAL: ADICIONAR NASCIMENTO ===== -->
+    <!-- ============================================================ -->
+    <div class="modal fade" id="birthModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Registrar nascimento</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Fechar"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="row g-2">
+              <div class="col-md-6">
+                <label class="form-label small text-muted">Data</label>
+                <input
+                  class="form-control form-control-sm"
+                  type="date"
+                  id="birth_date"
+                />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small text-muted"
+                  >Total de filhotes</label
+                >
+                <input
+                  class="form-control form-control-sm"
+                  type="number"
+                  min="0"
+                  id="birth_total"
+                />
+              </div>
+            </div>
+            <div class="row g-2 mt-1">
+              <div class="col-md-6">
+                <label class="form-label small text-muted">Machos</label>
+                <input
+                  class="form-control form-control-sm"
+                  type="number"
+                  min="0"
+                  id="birth_male"
+                />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small text-muted">Fêmeas</label>
+                <input
+                  class="form-control form-control-sm"
+                  type="number"
+                  min="0"
+                  id="birth_female"
+                />
+              </div>
+            </div>
+            <div class="mb-2 mt-1">
+              <label class="form-label small text-muted">Responsável</label>
+              <input
+                class="form-control form-control-sm"
+                id="birth_responsible"
+              />
+            </div>
+            <div
+              class="alert-custom alert-danger-custom"
+              id="birthFormError"
+              style="display: none"
+            >
+              <i class="bi bi-exclamation-triangle-fill"></i>
+              <span id="birthFormErrorText"></span>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">
+              Cancelar
+            </button>
+            <button class="btn btn-primary btn-sm" id="saveBirthBtn">
+              <i class="bi bi-check2"></i> Salvar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== BOOTSTRAP JS ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- ===== SEU JS ===== -->
+    <script src="script.js"></script>
+  </body>
+</html>
