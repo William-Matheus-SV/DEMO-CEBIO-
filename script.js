@@ -2311,3 +2311,312 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 console.log("✅ CEBIO - Todos os scripts carregados com sucesso!");
+
+// ============================================================
+// MURAL DE EVENTOS (Escala / Feriados / Treinamentos / Procedimentos)
+// ============================================================
+const MURAL_CATEGORY_LABEL = {
+  escala: "Escala / Plantão",
+  feriado: "Feriado",
+  treinamento: "Treinamento",
+  procedimento: "Procedimento / Manutenção",
+};
+const MURAL_WEEKDAYS = ["DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SÁB"];
+
+let muralCurrentMonth = "2026-07"; // mesmo "hoje" fictício usado no resto do mockup
+let muralModalInstance = null;
+let muralSelectedDate = null;
+
+function isAdminUser() {
+  const user = getCurrentUser();
+  return !!user && user.role.indexOf("Técnic") === -1;
+}
+
+function populateMuralMonthSelect() {
+  const select = document.getElementById("muralMonthSelect");
+  if (!select) return;
+  const months = ["2026-06", "2026-07", "2026-08", "2026-09"];
+  const labels = {
+    "2026-06": "Junho 2026",
+    "2026-07": "Julho 2026",
+    "2026-08": "Agosto 2026",
+    "2026-09": "Setembro 2026",
+  };
+  select.innerHTML = months
+    .map(function (m) {
+      return `<option value="${m}" ${m === muralCurrentMonth ? "selected" : ""}>${labels[m]}</option>`;
+    })
+    .join("");
+  select.addEventListener("change", function () {
+    muralCurrentMonth = this.value;
+    renderMuralGrid();
+    resetMuralDayDetail();
+  });
+}
+
+function renderMuralGrid() {
+  const grid = document.getElementById("muralGrid");
+  if (!grid) return;
+
+  const [year, month] = muralCurrentMonth.split("-").map(Number);
+  const firstDay = new Date(year, month - 1, 1);
+  const daysInMonth = new Date(year, month, 0).getDate();
+  const startWeekday = firstDay.getDay(); // 0 = domingo
+
+  const events = getAll("mural_events").filter(function (e) {
+    return e.date && e.date.indexOf(muralCurrentMonth) === 0;
+  });
+  const eventsByDay = {};
+  events.forEach(function (e) {
+    const day = Number(e.date.split("-")[2]);
+    (eventsByDay[day] = eventsByDay[day] || []).push(e);
+  });
+
+  let html = MURAL_WEEKDAYS.map(function (w) {
+    return `<div class="mural-weekday">${w}</div>`;
+  }).join("");
+
+  for (let i = 0; i < startWeekday; i++) {
+    html += '<div class="mural-day empty"></div>';
+  }
+
+  for (let day = 1; day <= daysInMonth; day++) {
+    const dayEvents = eventsByDay[day] || [];
+    const visible = dayEvents.slice(0, 2);
+    const extra = dayEvents.length - visible.length;
+
+    const postits =
+      visible
+        .map(function (e) {
+          return `<div class="mural-postit cat-${e.category}">${escapeHtml(e.title)}</div>`;
+        })
+        .join("") +
+      (extra > 0 ? `<div class="mural-postit more">+${extra}</div>` : "");
+
+    const dateStr = muralCurrentMonth + "-" + String(day).padStart(2, "0");
+    html += `<div class="mural-day" data-date="${dateStr}"><span class="day-number">${day}</span>${postits}</div>`;
+  }
+
+  grid.innerHTML = html;
+
+  grid.querySelectorAll(".mural-day[data-date]").forEach(function (el) {
+    el.addEventListener("click", function () {
+      showMuralDayDetail(this.dataset.date);
+    });
+  });
+}
+
+function showMuralDayDetail(dateStr) {
+  muralSelectedDate = dateStr;
+  const detail = document.getElementById("muralDayDetail");
+  if (!detail) return;
+
+  const events = getAll("mural_events").filter(function (e) {
+    return e.date === dateStr;
+  });
+  const admin = isAdminUser();
+  const [y, m, d] = dateStr.split("-");
+
+  detail.innerHTML = `
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <h5 class="mb-0 fw-semibold">Eventos de ${d}/${m}/${y}</h5>
+            <button class="btn btn-primary btn-sm" onclick="openMuralEventModal(null, '${dateStr}')">
+                <i class="bi bi-plus-lg"></i> Novo evento
+            </button>
+        </div>
+        ${
+          events.length
+            ? events
+                .map(function (e) {
+                  return `
+                <div class="d-flex justify-content-between align-items-center border-bottom py-2">
+                    <div>
+                        <span class="mural-postit cat-${e.category}" style="display:inline-block;">${escapeHtml(MURAL_CATEGORY_LABEL[e.category] || e.category)}</span>
+                        <b class="ms-2">${escapeHtml(e.title)}</b>
+                        ${e.notes ? '<div class="small text-muted mt-1">' + escapeHtml(e.notes) + "</div>" : ""}
+                    </div>
+                    ${
+                      admin
+                        ? `
+                        <div class="table-actions">
+                            <button class="btn btn-sm btn-outline-secondary" onclick="openMuralEventModal(${e.id})" title="Editar"><i class="bi bi-pencil"></i></button>
+                            <button class="btn btn-sm btn-outline-danger" onclick="handleDeleteMuralEvent(${e.id})" title="Excluir"><i class="bi bi-trash"></i></button>
+                        </div>
+                    `
+                        : ""
+                    }
+                </div>
+            `;
+                })
+                .join("")
+            : '<p class="text-muted small mb-0">Nenhum evento neste dia.</p>'
+        }
+    `;
+}
+
+function resetMuralDayDetail() {
+  const detail = document.getElementById("muralDayDetail");
+  if (!detail) return;
+  detail.innerHTML = `
+        <div>
+            <h5 class="mb-0 fw-semibold">Detalhes do dia</h5>
+            <small class="text-muted">Clique em um dia no mural para ver os eventos</small>
+        </div>
+    `;
+}
+
+function openMuralEventModal(eventId, prefilledDate) {
+  const modalEl = document.getElementById("muralEventModal");
+  if (!muralModalInstance) {
+    muralModalInstance = new bootstrap.Modal(modalEl);
+  }
+
+  const title = document.getElementById("muralEventModalTitle");
+  const errorBox = document.getElementById("muralEventFormError");
+  errorBox.style.display = "none";
+
+  if (eventId) {
+    const ev = getAll("mural_events").find(function (e) {
+      return e.id === eventId;
+    });
+    if (!ev) return;
+    title.textContent = "Editar evento";
+    document.getElementById("muralEventId").value = ev.id;
+    document.getElementById("muralEventTitle").value = ev.title;
+    document.getElementById("muralEventDate").value = ev.date;
+    document.getElementById("muralEventCategory").value = ev.category;
+    document.getElementById("muralEventNotes").value = ev.notes || "";
+  } else {
+    title.textContent = "Novo evento";
+    document.getElementById("muralEventId").value = "";
+    document.getElementById("muralEventTitle").value = "";
+    document.getElementById("muralEventDate").value =
+      prefilledDate || muralSelectedDate || "";
+    document.getElementById("muralEventCategory").value = "escala";
+    document.getElementById("muralEventNotes").value = "";
+  }
+
+  muralModalInstance.show();
+}
+
+function handleDeleteMuralEvent(eventId) {
+  const ev = getAll("mural_events").find(function (e) {
+    return e.id === eventId;
+  });
+  if (!ev) return;
+  if (confirm('Excluir o evento "' + ev.title + '"?')) {
+    removeRecord("mural_events", eventId);
+    renderMuralGrid();
+    showMuralDayDetail(ev.date);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const saveBtn = document.getElementById("saveMuralEventBtn");
+  const newBtn = document.getElementById("newMuralEventBtn");
+  if (newBtn)
+    newBtn.addEventListener("click", function () {
+      openMuralEventModal(null, null);
+    });
+  if (!saveBtn) return;
+
+  saveBtn.addEventListener("click", function () {
+    const errorBox = document.getElementById("muralEventFormError");
+    const errorText = document.getElementById("muralEventFormErrorText");
+
+    const id = document.getElementById("muralEventId").value;
+    const title = document.getElementById("muralEventTitle").value.trim();
+    const date = document.getElementById("muralEventDate").value;
+    const category = document.getElementById("muralEventCategory").value;
+    const notes = document.getElementById("muralEventNotes").value.trim();
+
+    if (!title || !date) {
+      errorText.textContent = "Preencha título e data.";
+      errorBox.style.display = "flex";
+      return;
+    }
+
+    const data = { title: title, date: date, category: category, notes: notes };
+
+    if (id) {
+      updateRecord("mural_events", Number(id), data);
+    } else {
+      const user = getCurrentUser();
+      data.createdBy = user ? user.id : null;
+      createRecord("mural_events", data);
+      muralCurrentMonth = date.slice(0, 7);
+      const select = document.getElementById("muralMonthSelect");
+      if (select) select.value = muralCurrentMonth;
+    }
+
+    errorBox.style.display = "none";
+    muralModalInstance.hide();
+    renderMuralGrid();
+    showMuralDayDetail(date);
+  });
+});
+
+// ===== SEED INICIAL: eventos de exemplo baseados no mural físico =====
+document.addEventListener("DOMContentLoaded", function () {
+  seedIfEmpty("mural_events", [
+    {
+      id: 1,
+      date: "2026-07-01",
+      title: "Plantão · Sandra",
+      category: "escala",
+      notes: "",
+      createdBy: "sandra",
+    },
+    {
+      id: 2,
+      date: "2026-07-02",
+      title: "Treinamento médico",
+      category: "treinamento",
+      notes: "",
+      createdBy: "vinicius",
+    },
+    {
+      id: 3,
+      date: "2026-07-03",
+      title: "Treinamento veterinário",
+      category: "treinamento",
+      notes: "",
+      createdBy: "vinicius",
+    },
+    {
+      id: 4,
+      date: "2026-07-08",
+      title: "Troca de gaiola · 1x RA",
+      category: "procedimento",
+      notes: "",
+      createdBy: "rayara",
+    },
+    {
+      id: 5,
+      date: "2026-07-14",
+      title: "Feriado",
+      category: "feriado",
+      notes: "",
+      createdBy: "sandra",
+    },
+    {
+      id: 6,
+      date: "2026-07-18",
+      title: "Troca de gaiola · 1x RA",
+      category: "procedimento",
+      notes: "",
+      createdBy: "natally",
+    },
+    {
+      id: 7,
+      date: "2026-07-21",
+      title: "Troca de gaiola",
+      category: "procedimento",
+      notes: "",
+      createdBy: "gutemberg",
+    },
+  ]);
+
+  populateMuralMonthSelect();
+  renderMuralGrid();
+});

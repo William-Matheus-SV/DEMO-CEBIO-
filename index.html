@@ -271,8 +271,7 @@
                     <div class="card-header-custom">
                       <h5 class="fw-semibold">Atividade recente</h5>
                       <small class="text-muted"
-                        >Últimos eventos registrados no sistema</small
-                      >
+                        >Últimos eventos registrados no sistema</small>
                     </div>
                     <div class="table-responsive mt-2">
                       <table class="table table-custom">
@@ -320,6 +319,8 @@
                     </div>
                   </div>
                 </div>
+              </div>
+
                 <div class="row g-3 mt-1">
                 <div class="col-lg-6">
                   <div class="card-custom" id="myActivitiesCard" style="display:none">
@@ -348,7 +349,44 @@
                   </div>
                 </div>
               </div>
+              <!-- ============================================================ -->
+              <!-- ===== MURAL DE EVENTOS (Escala / Feriados / Treinamentos) == -->
+              <!-- ============================================================ -->
+              <div class="row g-3 mt-1">
+                  <div class="col-12">
+                      <div class="card-custom">
+                          <div class="card-header-custom">
+                              <div>
+                                  <h5 class="mb-0 fw-semibold">Mural de eventos · Controle mensal</h5>
+                                  <small class="text-muted">Escala, feriados, treinamentos e procedimentos do mês</small>
+                              </div>
+                              <div class="d-flex align-items-center gap-2">
+                                  <select class="form-select form-select-sm" id="muralMonthSelect" style="width:auto;"></select>
+                                  <button class="btn btn-primary btn-sm" id="newMuralEventBtn">
+                                      <i class="bi bi-plus-lg"></i> Novo evento
+                                  </button>
+                              </div>
+                          </div>
+
+                          <div class="mural-grid" id="muralGrid"></div>
+
+                          <div class="legend mt-3">
+                              <span><span class="dot" style="background:#fff6b8;border-color:#e3d27a;"></span>Escala / Plantão</span>
+                              <span><span class="dot" style="background:#ffd9d9;border-color:#e79c9c;"></span>Feriado</span>
+                              <span><span class="dot" style="background:#ffe1ea;border-color:#e79cc0;"></span>Treinamento</span>
+                              <span><span class="dot" style="background:#c9f2e8;border-color:#7ecdb6;"></span>Procedimento / Manutenção</span>
+                          </div>
+                      </div>
+
+                      <div class="card-custom mt-3" id="muralDayDetail">
+                          <div>
+                              <h5 class="mb-0 fw-semibold">Detalhes do dia</h5>
+                              <small class="text-muted">Clique em um dia no mural para ver os eventos</small>
+                          </div>
+                      </div>
+                  </div>
               </div>
+            </div>
             </section>
             <!-- ============================================================ -->
             <!-- ===== 2. ANIMAIS ===== -->
@@ -1684,7 +1722,53 @@
         </div>
       </div>
     </div>
-
+    <!-- ============================================================ -->
+    <!-- ===== MODAL: EVENTO DO MURAL (criar / editar) ============== -->
+    <!-- ============================================================ -->
+    <div class="modal fade" id="muralEventModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="muralEventModalTitle">Novo evento</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="muralEventId">
+                    <div class="mb-2">
+                        <label class="form-label small text-muted">Título</label>
+                        <input class="form-control form-control-sm" id="muralEventTitle" placeholder="Ex.: Plantão · Sandra">
+                    </div>
+                    <div class="row g-2">
+                        <div class="col-6">
+                            <label class="form-label small text-muted">Data</label>
+                            <input class="form-control form-control-sm" type="date" id="muralEventDate">
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label small text-muted">Categoria</label>
+                            <select class="form-select form-select-sm" id="muralEventCategory">
+                                <option value="escala">Escala / Plantão</option>
+                                <option value="feriado">Feriado</option>
+                                <option value="treinamento">Treinamento</option>
+                                <option value="procedimento">Procedimento / Manutenção</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <label class="form-label small text-muted">Observações</label>
+                        <textarea class="form-control form-control-sm" rows="2" id="muralEventNotes"></textarea>
+                    </div>
+                    <div class="alert-custom alert-danger-custom mt-2" id="muralEventFormError" style="display:none;">
+                        <i class="bi bi-exclamation-triangle-fill"></i>
+                        <span id="muralEventFormErrorText"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-primary btn-sm" id="saveMuralEventBtn"><i class="bi bi-check2"></i> Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- ===== BOOTSTRAP JS ===== -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
